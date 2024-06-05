@@ -31,8 +31,7 @@ export const Navbar = () => {
                         Parqueos
                     </NavLink>
                 </div>
-            </div>
-            
+            </div>            
         </nav>
     )
 }
