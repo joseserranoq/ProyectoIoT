@@ -6,11 +6,11 @@ import { Navbar } from "../ui/components/Navbar"
 export const AppRouter = () => {
   return (
     <>
-    <Navbar/>
-    <Routes>
-        <Route path="*" element={<Traffic/>}/>
-        <Route path="/parkinglot/:number" element={<ParkingLot/>}/>
-    </Routes>
+      <Navbar />
+      <Routes>
+        <Route path="*" element={<Traffic />} />
+        <Route path="/parkinglot/:number" element={<ParkingLot />} />
+      </Routes>
     </>
   )
 }

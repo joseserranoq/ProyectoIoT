@@ -1,104 +1,31 @@
+export const Traffic = () => {
 
-const mockData = [
+const parkings = [
     {
-        id: 1,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
+        parkingId: 1,
+        parkingName: "Parking 1",
     },
     {
-        id: 2,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 3,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 4,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 5,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 6,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 7,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 8,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 9,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
-    },
-    {
-        id: 10,
-        availability: 0,
-        car_info: {
-            vehicle_plate: "",
-            vehicle_model: "",
-            vehicle_brand: "",
-        }
+        parkingId: 2,
+        parkingName: "Parking 2",
     }
 ]
 
-export const Traffic = () => {
   return (
     <>
     <div className="container-fluid text-center">
         <h1>Tráfico</h1>
         <img className="img-fluid " src="../../vehiculos.jpg" alt="Tráfico"/>    
-        
+        {
+            parkings.map(parking => (
+                <div key={parking.parkingId} className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">{parking.parkingName}</h5>
+                        <a href={`/parkinglot/${parking.parkingId}`} className="btn btn-primary">Ver estacionamiento</a>
+                    </div>
+                </div>
+            ))
+        }
     </div>
     </>
   )
