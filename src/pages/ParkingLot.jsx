@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Lot } from '../ui/components/Lot'
+import { firebaseGetDoc } from '../api/firebaseGetDoc'
 
-const mockData = [
+export const mockData = [
   {
     id: 1,
     availability: 0,
@@ -97,9 +98,23 @@ const mockData = [
 ]
 
 // TODO: Obtener los datos de los estacionamientos desde el servidor
+// se suban los datos a cloud
 export const ParkingLot = () => {
+  useEffect(() => {
+    (async()=>{
+      if (number === '1'){      
+        const data = await firebaseGetDoc(`Parking/sector1/lot`)
+        setParkingLots(data.sort((a,b)=>a.id-b.id))
+      }else {
+        const data = await firebaseGetDoc(`Parking/sector2/lot`)
+        setParkingLots(data.sort((a,b)=>a.id-b.id))
+      }
+    })()
+    }, [])
+  
   const { number } = useParams()
-  const [parkingLots, setParkingLots] = useState(mockData)
+  const [parkingLots, setParkingLots] = useState([])
+
   return (
     <div style={{
       display: "flex",
@@ -123,7 +138,7 @@ export const ParkingLot = () => {
 
         {
           parkingLots.map((parkingLot, index) => (
-            <Lot key={parkingLot.id} parkingLot={parkingLot} setParkingLots={setParkingLots} index={index} />
+            <Lot key={parkingLot.id} parkingLot={parkingLot} setParkingLots={setParkingLots} index={index} sector={number} />
           ))
         }
       </div>

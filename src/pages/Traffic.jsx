@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+import { FirebaseSetDoc } from "../api/firebaseSetDoc"
+// import { mockData } from "./ParkingLot"
+
 
 export const Traffic = () => {
 
@@ -19,6 +22,13 @@ export const Traffic = () => {
         route3: Math.floor(Math.random() * 100),
       })
     }
+    // (async ()=>{
+      // mockData.forEach(async (lot) => {
+      //   const data = await FirebaseSetDoc("/Parking/sector2/lot",lot.id,lot)        
+      // })
+      // const data = await FirebaseSetDoc(`Parking/sector1/lot`,'1',mockData[0])
+      // console.log(data, 'Data subida a cloud')
+    // })()
   }, [])
 
   const [isLoading, setIsLoading] = useState(false)
@@ -57,8 +67,6 @@ export const Traffic = () => {
 
   }
 
-
-
   return (
 
     <>
@@ -83,12 +91,33 @@ export const Traffic = () => {
             </button>
 
             <button className="btn btn-primary m-1" onClick={() => {
+              //registra en firebase
+              const time = new Date().toLocaleString()
+              const data1 = [{
+                count: cars.route1,
+                route: 'Ruta 1',
+                date: time
+              },
+              {
+                count: cars.route2,
+                route: 'Ruta 2',
+                date: time
+              },
+              {
+                count: cars.route3,
+                route: 'Ruta 3',
+                date: time
+              }]
+              data1.forEach(async (data) => {
+                await FirebaseSetDoc("/Traffic", 'pendiente de borrar esta variable', data)
+              })
               localStorage.removeItem('cars')
               setCars({
                 route1: 0,
                 route2: 0,
                 route3: 0,
               })
+
             }}>
               Finalizar Dia
             </button>
